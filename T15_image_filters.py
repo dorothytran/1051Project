@@ -197,30 +197,49 @@ def three_tone(image:Image,colour1:str,colour2:str,colour3:str)->Image:
         set_color(three_toned_image,x,y,new_color)  
     return three_toned_image
 
+def flip_horizontal(image: Image) -> Image:
+    """ Return a copy of the image where all the pixels are mirrored with 
+    respect to the x axis.
+    """
+    copy_image = copy(image)
+    copy2_image = copy(image)
+    height = get_height(copy_image)
+    for x, y, (r, g, b) in copy_image:
+        new_y = get_color(copy_image, x, y)
+        set_color(copy2_image, x, height - y - 1, new_y)
+    return copy2_image
+
+def flip_vertical(image: Image) -> Image:
+    """ Return a copy of the image where all the pixels are mirrored with
+    respect to the y axis.
+    """
+    copy_image = copy(image)
+    copy2_image = copy(image)
+    width = get_width(copy_image)
+    for x, y, (r, g, b) in copy_image:
+        new_x = get_color(copy_image, x, y)
+        set_color(copy2_image, width - x - 1, y, new_x)
+    return copy2_image
+
 FILENAME=('miss_sullivan.jpg')
 original_image=load_image(FILENAME)
 show(original_image)
 
 red_image=red_channel(original_image)
 show(red_image)
-save_as(red_image,'red_image.jpg')
 
 green_image=green_channel(original_image)
 show(green_image)
-save_as(green_image,'green_image.jpg')
 
 blue_image=blue_channel(original_image)
 show(blue_image)
-save_as(blue_image,'blue_image.jpg')
 
 combined_image=combine(red_image,green_image,blue_image)
 show(combined_image)
-save_as(combined_image,'combined_image.png')
 
 two_toned_image=two_tone(original_image,'lime','magenta')
 show(two_toned_image)
-save_as(two_toned_image,'two_toned_image.png')
 
 three_toned_image=three_tone(original_image,'cyan','magenta','yellow')
 show(three_toned_image)
-save_as(three_toned_image,'three_toned_image.png')
+
