@@ -221,8 +221,7 @@ def flip_vertical(image: Image) -> Image:
         set_color(copy2_image, width - x - 1, y, new_x)
     return copy2_image
 
-FILENAME=('miss_sullivan.jpg')
-original_image=load_image(FILENAME)
+original_image=load_image(choose_file())
 show(original_image)
 
 red_image=red_channel(original_image)
